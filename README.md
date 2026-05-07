@@ -1,122 +1,150 @@
-# Hotel Revenue and Cancellation Analysis
+# Hotel Revenue Analysis Project
 
-## Project Overview
+## Overview
 
-This project analyzes hotel booking data to understand revenue performance, cancellation behavior, and distribution channel efficiency. The goal is to identify patterns that affect hotel revenue and provide business recommendations based on data.
+This project analyzes hotel booking and revenue data to identify trends related to:
+- cancellations
+- revenue generation
+- booking channels
+- lead time behavior
+- customer booking patterns
 
-The project includes data cleaning, feature engineering, SQL analysis, KPI calculation, data visualization, and an exploratory machine learning model for booking cancellation prediction.
+The project includes:
+- data cleaning
+- feature engineering
+- exploratory data analysis (EDA)
+- SQL export
+- Tableau-style visual analysis
+- basic machine learning for cancellation prediction
 
-## Business Questions
+---
 
-This analysis focuses on the following questions:
-
-- Which hotel type generates more revenue?
-- How do cancellation rates differ between hotel types?
-- Which distribution channels bring the most revenue?
-- Which channels have the highest cancellation risk?
-- How does lead time affect cancellation probability?
-- Can booking features help predict cancellations?
-
-## Dataset
-
-The dataset contains hotel booking records with information about:
-
-- hotel type
-- booking dates
-- lead time
-- length of stay
-- distribution channel
-- market segment
-- ADR
-- cancellation status
-- guest information
-
-To simulate real-world data quality issues, missing values, duplicates, inconsistent categories, outliers, and invalid values were intentionally introduced and then handled during cleaning.
-
-## Tools Used
+# Tools & Technologies
 
 - Python
-- pandas
+- Pandas
 - NumPy
 - Matplotlib
+- Seaborn
 - SQLite
-- SQL
-- scikit-learn
-- Jupyter Notebook
+- Scikit-learn
 
-## Project Workflow
+---
 
-1. Data Cleaning
+# Project Workflow
 
-The cleaning process included:
+## 1. Data Cleaning
 
-- removing duplicate bookings
+Several preprocessing steps were performed before analysis:
+
 - handling missing values
-- standardizing distribution channel names
-- correcting invalid guest values
-- removing impossible bookings with zero nights
-- handling ADR outliers
-- creating a clean arrival date column
+- removing duplicates
+- fixing inconsistent values
+- correcting invalid entries
+- standardizing categorical variables
 
-2. Feature Engineering
+## 2. Feature Engineering
 
-New features were created to support analysis:
+| Feature | Description |
+|---|---|
+| `total_guests` | Total number of guests per booking |
+| `total_nights` | Total nights stayed |
+| `total_revenue` | Estimated booking revenue |
+| `lead_time_group` | Grouped booking lead time categories |
+| `is_family` | Indicates family bookings |
 
-- total nights
-- total price
-- realized revenue
-- month
-- season
-- price group
+## 3. Exploratory Data Analysis
 
-Canceled bookings were assigned zero realized revenue.
+The analysis explored:
+- hotel revenue trends
+- cancellation behavior
+- booking channels
+- seasonal patterns
+- ADR (Average Daily Rate)
+- lead time impact on cancellations
 
-3. SQL Analysis
+### Key Insights
 
-SQL was used to analyze:
+- City hotels generated higher total revenue than resort hotels.
+- Resort hotels showed lower cancellation rates compared to city hotels.
+- Certain distribution channels accounted for the majority of bookings.
+- Longer lead times were associated with higher cancellation probability.
+- ADR varied significantly depending on hotel type and booking channel.
+- A relatively small number of channels generated the majority of total bookings.
 
-- hotel performance by revenue, ADR, and cancellation rate
-- distribution channel performance
-- cancellation rate by lead time group
+---
 
-4. Machine Learning
+# Dashboard & Visualization Preview
 
-An exploratory Random Forest model was built to predict booking cancellations.
+## Revenue & Cancelation Analysis
 
-The model was evaluated using:
+![Revenue Analysis](images/revenue_dashboard.png)
 
-- accuracy
-- precision
-- recall
-- F1-score
-- confusion matrix
 
-Since cancellation prediction involves imbalanced classes, class balancing was applied to improve recall for canceled bookings.
 
-## Key Insights
+The visual analysis focused on:
+- revenue distribution
+- cancellation trends
+- booking channel performance
+- lead time analysis
+- hotel type comparison
 
-- City hotels generated higher total revenue due to higher booking volume and stronger ADR.
-- City hotels also had higher cancellation rates, making part of their demand less reliable.
-- TA/TO channels produced the highest revenue but also showed high cancellation risk.
-- Direct and corporate channels had lower cancellation rates, suggesting more stable demand.
-- Bookings made more than 90 days in advance had significantly higher cancellation rates.
-- Last-minute bookings were more reliable but may represent lower planning visibility for hotels.
+---
 
-## Business Recommendations
+# Machine Learning
 
-- Reduce overdependence on high-cancellation channels by encouraging more direct bookings.
-- Monitor long lead-time bookings more carefully, as they carry higher cancellation risk.
-- Use cancellation risk signals to improve overbooking and revenue management decisions.
-- Strengthen direct booking incentives to improve revenue stability.
-- Track cancellation rate together with revenue, not separately, because high revenue channels may also create operational uncertainty.
+A simple machine learning classification model was created to predict booking cancellations.
 
-## Future Improvements
+### Features Used
+- lead time
+- ADR
+- hotel type
+- booking channel
+- customer type
+- number of guests
 
-Possible future improvements include:
+### Model
+A Random Forest classification model was trained using Scikit-learn.
 
-- building an interactive Tableau dashboard
-- adding more advanced feature engineering
-- comparing multiple machine learning models
-- adding cross-validation
-- creating cancellation risk segments
-- estimating potential revenue loss from cancellations
+### Evaluation
+
+The model demonstrated the ability to identify cancellation patterns based on booking behavior and customer characteristics.
+
+The purpose of the ML section was to demonstrate a basic machine learning workflow:
+- preprocessing
+- feature encoding
+- train/test split
+- model training
+- prediction
+- evaluation
+
+
+# Limitations
+
+- The dataset represents historical hotel booking data and may not reflect current market conditions.
+- Some missing values and inconsistencies required preprocessing and approximation techniques.
+- Machine learning performance may be limited by available features and class imbalance.
+- Revenue calculations were estimated using available booking information.
+
+# Author
+
+Semyon Sidorov
+
+---
+
+# Project Structure
+
+```text
+Hotel_Revenue_Analysis_Project/
+│
+├── data/
+│   ├── raw/
+│   └── processed/
+│
+├── notebooks/
+│
+├── images/
+│
+├── README.md
+│
+└── requirements.txt
